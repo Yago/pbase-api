@@ -4,6 +4,8 @@
 
 ## Install
 
+It request **NodeJS 7.7+**.
+
 ````bash
 $ yarn install
 or
