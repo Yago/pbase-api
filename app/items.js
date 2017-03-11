@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 
 module.exports = async (req, res) => {
   const brand = req.params.brand;
+  const type = req.params.type;
   const url = `http://www.pbase.com/cameras/${brand}`;
 
   const dom = await axios.get(url);
@@ -63,5 +64,5 @@ module.exports = async (req, res) => {
   items.digital_cameras.sort((a,b) => b.year - a.year);
   items.lenses.sort((a,b) => b.year - a.year);
 
-  res.send(items);
+  res.send(items[type]);
 };

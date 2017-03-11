@@ -27,7 +27,6 @@ module.exports = async (req, res) => {
     .reduce((acc, value) => {
       if (acc.indexOf(value) === -1) {
         acc.push(value);
-        console.log(value);
       }
       return acc;
     }, []);
