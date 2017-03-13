@@ -9,23 +9,35 @@ module.exports = async (req, res) => {
   const $ = cheerio.load(dom.data);
   const brands = [];
 
-  $('td').each(function(i, elem) {
+  $('td').not('.ma, .wb, .top').each(function(i, elem) {
     const brandUrl = $(this).find('a').attr('href');
-    const brand = brandUrl ? brandUrl.replace('/cameras/', '') : null;
+    const brandSlug = brandUrl ? brandUrl.replace('/cameras/', '') : null;
+    let brandName = brandSlug;
 
-    if (brand && brand.indexOf('/') === -1) {
-      brands.push(brand);
+    if ($(this).find('b').text()) {
+      brandName = $(this).find('b').text();
+    } else if ($(this).find('span').text()) {
+      brandName = $(this).find('span').text();
+    } else if ($(this).find('a').text()) {
+      brandName = $(this).find('a').text();
+    }
+
+    if (brandSlug && brandSlug.indexOf('/') === -1) {
+      brands.push({
+        slug: brandSlug,
+        name: brandName,
+      });
     }
   });
 
   const response = brands
     .sort((a, b) => {
-      if(a < b) return -1;
-      if(a > b) return 1;
+      if(a.slug < b.slug) return -1;
+      if(a.slug > b.slug) return 1;
      return 0;
     })
     .reduce((acc, value) => {
-      if (acc.indexOf(value) === -1) {
+      if (!acc.find(item => item.slug === value.slug)) {
         acc.push(value);
       }
       return acc;
