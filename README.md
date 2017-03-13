@@ -1,4 +1,4 @@
-# 📷 PBase - scrape API
+# 📷 PBase - API
 
 > [pabase.com](http://www.pbase.com/cameras) have a great database of digital/film cameras and lenses. This just transform it static content into a simple json API
 
