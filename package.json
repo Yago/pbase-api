@@ -4,9 +4,6 @@
   "main": "index.js",
   "author": "Yago",
   "license": "MIT",
-  "scripts": {
-    "serve": "./node_modules/.bin/babel index.js --watch --out-file bundle.js"
-  },
   "dependencies": {
     "axios": "^0.15.3",
     "cheerio": "^0.22.0",
