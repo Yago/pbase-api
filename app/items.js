@@ -30,6 +30,7 @@ module.exports = async (req, res) => {
     // Push item in right category
     if (length === 6) { // is item row
       const item = {
+        id: `${brand}_${i}`,
         thumb: $(this).find('td:first-child a img').attr('src') || null,
         name: $(this).find('td:nth-child(2) a span').text() || null,
         year: parseInt($(this).find('td:nth-child(3) span').text()) || null,
