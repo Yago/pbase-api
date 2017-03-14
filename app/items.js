@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
     film: [],
     digital_back: [],
     video_cameras: [],
+    other: [],
   };
 
   $('tr').each(function(i, elem) {
@@ -42,9 +43,9 @@ module.exports = async (req, res) => {
 
       // Add extra focal length and aperture attribute
       if (current === 'lenses') {
-        const lengthMM = item.name.match(/(\d+)(\-)?(\.)?(\d+)?(mm|\smm|\sf)/g);
-        const lengthCM = item.name.match(/(\d+)?(\.)?(\d+)(\-)?(\.)?(\d+)?(\.)?(\d+)?(cm|\scm|\sf)/g);
-        const aperture = item.name.match(/(f\/|f|mmF|\sF)(\d+)(\.)?(\d+)?(\-)?(\d+)?(\.)?(\d+)?/g);
+        const lengthMM = item.name ? item.name.match(/(\d+)(\-)?(\.)?(\d+)?(mm|\smm|\sf)/g) : null;
+        const lengthCM = item.name ? item.name.match(/(\d+)?(\.)?(\d+)(\-)?(\.)?(\d+)?(\.)?(\d+)?(cm|\scm|\sf)/g) : null;
+        const aperture = item.name ? item.name.match(/(f\/|f|mmF|\sF)(\d+)(\.)?(\d+)?(\-)?(\d+)?(\.)?(\d+)?/g) : null;
 
         if (lengthMM) item.focal = lengthMM.join().replace('mm', '').replace(' f', '');
         if (lengthCM && !lengthMM) item.focal = lengthCM.join().replace('cm', '').split('-').map(length => length * 10).join('-');
