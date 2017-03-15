@@ -1,5 +1,6 @@
 const express = require('express');
 const app  = express();
+const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -9,6 +10,6 @@ app.use((req, res, next) => {
 
 require('./app/routes')(app);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Example app listening on port 3000 !')
 })
